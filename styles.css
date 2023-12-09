@@ -1,0 +1,26 @@
+
+H1 {
+    text-align: center;
+    color: blue;
+}
+
+a {
+    box-align: right;
+
+}
+
+.encabezado-lista {
+ 
+    padding: 0 50px;
+    
+}
+fieldset {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.formulario {
+    max-width: 800px;
+    margin: 0 auto;
+}
