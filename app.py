@@ -14,13 +14,17 @@ ma = Marshmallow(app)
 
 class Producto(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100))
+    tipo = db.Column(db.String(100))
+    marca = db.Column(db.String(100))
+    modelo = db.Column(db.String(100))
     precio = db.Column(db.Integer)
     stock = db.Column(db.Integer)
     imagen = db.Column(db.String(400))
 
-    def __init__(self, nombre, precio, stock, imagen):
-        self.nombre = nombre
+    def __init__(self, tipo, marca, modelo, precio, stock, imagen):
+        self.tipo = tipo
+        self.marca = marca
+        self.modelo = modelo 
         self.precio = precio
         self.stock = stock
         self.imagen = imagen
@@ -30,7 +34,7 @@ with app.app_context():
 
 class ProductoSchema(ma.Schema):
     class Meta:
-        fields = ("id", "nombre", "precio", "stock", "imagen")
+        fields = ("id", "tipo","marca","modelo", "precio", "stock", "imagen")
 
 producto_schema = ProductoSchema()  
 productos_schema = ProductoSchema(many=True)
@@ -55,11 +59,13 @@ def delete_producto(id):
 
 @app.route("/productos", methods=["POST"]) 
 def create_producto():
-    nombre = request.json["nombre"]  
+    tipo = request.json["tipo"] 
+    marca = request.json["marca"] 
+    modelo = request.json["modelo"] 
     precio = request.json["precio"]  
     stock = request.json["stock"] 
     imagen = request.json["imagen"]  
-    new_producto = Producto(nombre, precio, stock, imagen)  
+    new_producto = Producto(tipo, marca, modelo, precio, stock, imagen)  
     db.session.add(new_producto) 
     db.session.commit() 
     return producto_schema.jsonify(new_producto) 
