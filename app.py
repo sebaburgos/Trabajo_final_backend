@@ -3,11 +3,10 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
-
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:3018@localhost/proyecto'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:020301@localhost/proyecto'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -47,12 +46,12 @@ def get_Productos():
 
 @app.route("/productos/<id>", methods=["GET"])
 def get_producto(id):
-    producto = Producto.query.get(id) 
+    producto = db.session.get(Producto, id) 
     return producto_schema.jsonify(producto)  
 
 @app.route("/productos/<id>", methods=["DELETE"])
 def delete_producto(id):
-    producto = Producto.query.get(id)  
+    producto = db.session.get(Producto, id)
     db.session.delete(producto)  
     db.session.commit()
     return producto_schema.jsonify(producto) 
@@ -72,7 +71,7 @@ def create_producto():
 
 @app.route("/productos/<id>", methods=["PUT"])
 def update_producto(id):
-    producto = Producto.query.get(id) 
+    producto = db.session.get(Producto, id) 
     producto.tipo = request.json["tipo"] 
     producto.marca = request.json["marca"] 
     producto.modelo = request.json["modelo"] 

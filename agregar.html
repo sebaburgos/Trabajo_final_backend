@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-   <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Agregar Producto</title>
 </head>
 <body>
     <div class="boton-agregar">
-        <form id="formulario" enctype="multipart/form-data">
-               
-                <label for="tipo">Tipo</label>
-                <input type="text" placeholder="Tipo de producto" id="tipo" required>
-                <label for="marca  ">Marca</label>
-                <input type="text" placeholder="Marca" id="marca" required>
-                <label for="modelo">Modelo</label>
-                <input type="text" placeholder="Modelo" id="modelo" required>
-                <label for="cantidad">Cantidad</label>
-                <input type="int " placeholder="Cantidad" id="cantidad" required>
-                <label for="Precio">Cantidad</label>
-                <input type="int " placeholder="Precio" id="Precio" required>
-                <label for="imagen">Imagen</label>
-                <input type="text" placeholder="Examinar" id="imagen">
+        <form id="formulario" enctype="multipart/form-data" action="http://127.0.0.1:5000/productos" method="POST">
+            <label for="tipo">Tipo</label>
+            <input type="text" placeholder="Tipo de producto" id="tipo" required>
+            <label for="marca">Marca</label>
+            <input type="text" placeholder="Marca" id="marca" required>
+            <label for="modelo">Modelo</label>
+            <input type="text" placeholder="Modelo" id="modelo" required>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" placeholder="Cantidad" id="cantidad" required>
+            <label for="precio">Precio</label>
+            <input type="number" placeholder="Precio" id="precio" required>
+            <label for="imagen">Imagen</label>
+            <input type="text" placeholder="Examinar" id="imagen">
             
-            <input type="submit" value="Agregar" required>
+            <input type="submit" value="Agregar">
         </form>
     </div>
     <a href="index.html">Volver</a>
