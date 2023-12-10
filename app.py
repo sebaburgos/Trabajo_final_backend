@@ -73,6 +73,9 @@ def create_producto():
 @app.route("/productos/<id>", methods=["PUT"])
 def update_producto(id):
     producto = Producto.query.get(id) 
+    producto.tipo = request.json["tipo"] 
+    producto.marca = request.json["marca"] 
+    producto.modelo = request.json["modelo"] 
     producto.precio = request.json["precio"]
     producto.stock = request.json["stock"]
     producto.imagen = request.json["imagen"]
