@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Editar Producto - TecnoHouse</title>
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    
+
+    <div class="container">
+        <form id="formularioEdicion">
+            <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo</label>
+                <input type="text" class="form-control" id="tipo" name="tipo">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" name="marca">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio">
+                <label for="stock" class="form-label">Cantidad</label>
+                <input type="number" class="form-control" id="stock" name="stock">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="text" class="form-control" id="imagen" name="imagen">
+                <!-- Otros campos aquí -->
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+
+    <script>
+        const URL = "http://127.0.0.1:5000/";
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        const formularioEdicion = document.getElementById('formularioEdicion');
+
+        fetch(`${URL}productos/${productId}`)
+            .then(response => response.json())
+            .then(producto => {
+                document.getElementById('tipo').value = producto.tipo;
+                document.getElementById('marca').value = producto.marca;
+                document.getElementById('modelo').value = producto.modelo;
+                document.getElementById('precio').value = producto.precio;
+                document.getElementById('stock').value = producto.stock;
+                document.getElementById('imagen').value = producto.imagen;
+                // Otros campos aquí
+            })
+            .catch(error => console.error('Error:', error));
+
+        formularioEdicion.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(formularioEdicion);
+
+            fetch(`${URL}productos/${productId}`, {
+                method: 'PUT',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Producto actualizado correctamente');
+                } else {
+                    throw new Error('Error al actualizar el producto');
+                }
+            })
+            .catch(error => {
+                alert('Error al actualizar el producto');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+    <a href="index.html">Volver</a>
+</body>
+</html>
+
