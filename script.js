@@ -33,11 +33,13 @@ function createEditButton(productId) {
     const editButton = document.createElement('button');
     editButton.textContent = 'Editar';
     editButton.addEventListener('click', function() {
-        // Lógica para la edición del producto con productId
-        // Puedes redirigir a otra página o abrir un formulario de edición aquí
+        window.location.href = 'editar.html?id=' + productId;
+        // Redirige a la página 'editar.html' con el ID del producto como parámetro en la URL
     });
     return editButton;
 }
+
+
 
 fetch(URL + 'productos')
     .then(function (response) {
@@ -112,4 +114,40 @@ fetch(URL + 'productos')
         .catch(function(error) {
             console.error('Error:', error);
         });
-    });
+});
+function buscarProductos() {
+    const tipoBusqueda = document.getElementById('tipoBusqueda').value.toLowerCase();
+    const marcaBusqueda = document.getElementById('marcaBusqueda').value.toLowerCase();
+
+    fetch(URL + 'productos')
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error al obtener los productos');
+            }
+        })
+        .then(function (data) {
+            let tablaProductos = document.getElementById('tablaProductos');
+            tablaProductos.innerHTML = '';
+
+            for (let producto of data) {
+                if (producto.tipo.toLowerCase().includes(tipoBusqueda) && producto.marca.toLowerCase().includes(marcaBusqueda)) {
+                    let fila = document.createElement('tr');
+                    fila.innerHTML = '<td>' + producto.id + '</td>' + '<td>' + producto.tipo + '</td>' + '<td>' + producto.marca + '</td>' + '<td>' + producto.modelo + '</td>' + '<td>' + producto.precio + '</td>' + '<td>' + producto.stock + '</td>' + '<td>' + producto.imagen + '</td>';
+
+                    const editButton = createEditButton(producto.id);
+                    fila.appendChild(editButton);
+
+                    const deleteButton = createDeleteButton(producto.id);
+                    fila.appendChild(deleteButton);
+
+                    tablaProductos.appendChild(fila);
+                }
+            }
+        })
+        .catch(function (error) {
+            alert('Error al obtener los productos');
+            console.error('Error:', error);
+        });
+}

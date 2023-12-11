@@ -72,14 +72,21 @@ def create_producto():
 @app.route("/productos/<id>", methods=["PUT"])
 def update_producto(id):
     producto = db.session.get(Producto, id) 
-    producto.tipo = request.json["tipo"] 
-    producto.marca = request.json["marca"] 
-    producto.modelo = request.json["modelo"] 
-    producto.precio = request.json["precio"]
-    producto.stock = request.json["stock"]
-    producto.imagen = request.json["imagen"]
+    if not producto:
+        return jsonify({"message": "Producto no encontrado"}), 404
+
+
+    # Procesar los datos del formulario
+    producto.tipo = request.form.get("tipo")
+    producto.marca = request.form.get("marca")
+    producto.modelo = request.form.get("modelo")
+    producto.precio = request.form.get("precio")
+    producto.stock = request.form.get("stock")
+    producto.imagen = request.form.get("imagen")
+
     db.session.commit()
     return producto_schema.jsonify(producto)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
