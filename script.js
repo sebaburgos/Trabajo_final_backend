@@ -40,7 +40,7 @@ function createEditButton(productId) {
 }
 
 
-
+// Funcion para listar productos
 fetch(URL + 'productos')
     .then(function (response) {
         if (response.ok) {
@@ -66,7 +66,7 @@ fetch(URL + 'productos')
 
             tablaProductos.appendChild(fila);
         }
-    })
+ })
     .catch(function (error) {
         alert('Error al obtener los productos');
         console.error('Error:', error);
@@ -151,3 +151,12 @@ function buscarProductos() {
             console.error('Error:', error);
         });
 }
+
+// funcion editar producto
+fetch(URL + 'productos/' + productId, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json' // Asegúrate de tener este encabezado
+    },
+    body: JSON.stringify(datosActualizadosDelProducto) // Aquí debes enviar los datos actualizados del producto
+})

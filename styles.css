@@ -1,16 +1,19 @@
-
+body{
+    background-color: aqua;
+}
 H1 {
     text-align: center;
     color: blue;
 }
 
 a {
-    box-align: right;
+    box-align: left;
 
 }
 
 .encabezado-lista {
-    padding: 20px 50px;
+    margin:auto;
+    padding: 20px 90px 20px 0;
 }
 
 fieldset {

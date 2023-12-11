@@ -8,24 +8,29 @@
     <title>Agregar Producto</title>
 </head>
 <body>
-    <div class="boton-agregar">
-        <form id="formulario" enctype="multipart/form-data" action="http://127.0.0.1:5000/productos" method="POST">
-            <label for="tipo">Tipo</label>
-            <input type="text" placeholder="Tipo de producto" id="tipo" required>
-            <label for="marca">Marca</label>
-            <input type="text" placeholder="Marca" id="marca" required>
-            <label for="modelo">Modelo</label>
-            <input type="text" placeholder="Modelo" id="modelo" required>
-            <label for="cantidad">Cantidad</label>
-            <input type="number" placeholder="Cantidad" id="cantidad" required>
-            <label for="precio">Precio</label>
-            <input type="number" placeholder="Precio" id="precio" required>
-            <label for="imagen">Imagen</label>
-            <input type="text" placeholder="Examinar" id="imagen">
-            
+    <h1>Agregar Producto</h1>
+
+<div class="container">
+    <form id="formulario" enctype="multipart/form-data" action="http://127.0.0.1:5000/productos" method="POST">
+        <div class="mb-3">   
+            <label for="tipo" class="form-label">Tipo</label> 
+            <input type="text" class="form-control" placeholder="Tipo de producto" id="tipo" required> 
+            <label for="marca" class="form-label">Marca</label> 
+            <input type="text"class="form-control" placeholder="Marca" id="marca" required> 
+            <label for="modelo" class="form-label">Modelo</label> 
+            <input type="text" class="form-control" placeholder="Modelo" id="modelo" required> 
+            <label for="cantidad" class="form-label">Cantidad</label> 
+            <input type="number" class="form-control"placeholder="Cantidad" id="cantidad" required> 
+            <label for="precio" class="form-label">Precio</label> 
+            <input type="number" class="form-control" placeholder="Precio" id="precio" required> 
+            <label for="imagen" class="form-label">Imagen</label> 
+            <input type="text" class="form-control" placeholder="Examinar" id="imagen"> 
+        </div> 
             <input type="submit" value="Agregar">
-        </form>
-    </div>
+    </form>
+    
+</div>
+
     <a href="index.html">Volver</a>
     <script src="script.js"></script>
 </body>

@@ -6,7 +6,7 @@ from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:020301@localhost/proyecto'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:3018@localhost/proyecto'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
